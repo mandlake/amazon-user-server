@@ -1,0 +1,17 @@
+junit:
+  jupiter:
+    execution:
+      parallel:
+        enable: true
+        mode:
+          default: same_thread
+          classes:
+            default: same_thread
+        config:
+          dynamic:
+            factor: 3
+    testinstance:
+      lifecycle:
+        default: per_class
+    conditions:
+      deactivate: org.junit.*DisabledCondition

@@ -1,7 +1,7 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { IBoard } from "../model/board";
 import Link from "next/link";
-import { PG } from "@/redux/common/enums/PG";
+import { PG } from "@/app/components/common/enums/PG";
 import { Typography } from "@mui/material";
 
 interface CellType {
@@ -24,8 +24,8 @@ export default function BoardColumns(prop: IBoard): GridColDef[] {
       minWidth: 30,
       width: 150,
       sortable: false,
-      field: "boardName",
-      headerName: "BoardName",
+      field: "title",
+      headerName: "Title",
       renderCell: ({ row }: CellType) => (
         <Typography>
           <Link
@@ -33,7 +33,7 @@ export default function BoardColumns(prop: IBoard): GridColDef[] {
             passHref
             className="underline"
           >
-            {row.boardName}
+            {row.title}
           </Link>
         </Typography>
       ),
@@ -43,10 +43,10 @@ export default function BoardColumns(prop: IBoard): GridColDef[] {
       minWidth: 30,
       width: 150,
       sortable: false,
-      field: "boardType",
-      headerName: "BoardType",
+      field: "description",
+      headerName: "Description",
       renderCell: ({ row }: CellType) => (
-        <Typography>{row.boardType}</Typography>
+        <Typography>{row.description}</Typography>
       ),
     },
     {

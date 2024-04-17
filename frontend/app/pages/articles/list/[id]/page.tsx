@@ -3,17 +3,17 @@
 import { useEffect } from "react";
 import { NextPage } from "next";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllArticles } from "@/app/components/article/service/article.slice";
+import { getAllArticlesByBoardId } from "@/app/components/article/service/article.slice";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import ArticleRows from "@/app/components/article/module/articles.rows";
-import { findAllArticles } from "@/app/components/article/service/article.service";
+import { findAllArticlesByBoardId } from "@/app/components/article/service/article.service";
 import ArticleColumns from "@/app/components/article/module/articles.columns";
 import { IArticle } from "@/app/components/article/model/article";
 
-const ArticlesPage: NextPage = (props: any) => {
+const ArticlesPageByBoardId: NextPage = (props: any) => {
   const dispatch = useDispatch();
-  const allArticles: [] = useSelector(getAllArticles);
+  const allArticles: [] = useSelector(getAllArticlesByBoardId);
 
   if (allArticles !== undefined) {
     console.log("allArticles is defined");
@@ -24,7 +24,7 @@ const ArticlesPage: NextPage = (props: any) => {
   }
 
   useEffect(() => {
-    dispatch(findAllArticles(1));
+    dispatch(findAllArticlesByBoardId(props.params.id));
   }, []);
 
   const columns = ArticleColumns({} as IArticle);
@@ -59,4 +59,4 @@ const ArticlesPage: NextPage = (props: any) => {
   );
 };
 
-export default ArticlesPage;
+export default ArticlesPageByBoardId;

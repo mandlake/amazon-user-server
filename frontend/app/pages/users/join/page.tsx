@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { PG } from "@/redux/common/enums/PG";
+import { PG } from "@/app/components/common/enums/PG";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ const JoinPage: NextPage = () => {
   const [join, setJoin] = useState({} as IUser);
 
   const handleSubmit = () => {
-    dispatch(joinId({ join }));
+    dispatch(joinId(join));
     router.push(`${PG.USER}/login`);
   };
 

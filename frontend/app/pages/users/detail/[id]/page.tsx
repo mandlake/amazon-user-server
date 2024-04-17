@@ -6,7 +6,7 @@ import {
   modifiedUserById,
 } from "@/app/components/user/service/user.service";
 import { getUserById } from "@/app/components/user/service/user.slice";
-import { PG } from "@/redux/common/enums/PG";
+import { PG } from "@/app/components/common/enums/PG";
 import { Button, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

@@ -14,8 +14,8 @@ import java.util.List;
 @Builder
 public class BoardDto {
     private Long id;
-    private String boardName;
-    private String boardType;
+    private String title;
+    private String description;
 
     @Builder.Default
     private List<Article> articles = new ArrayList<>();

@@ -1,5 +1,5 @@
-import { getAllUsers } from "@/app/components/user/service/user.slice";
 import { useSelector } from "react-redux";
+import { getAllUsers } from "../service/user.slice";
 
 export default function UserRows() {
   const allUsers: [] = useSelector(getAllUsers);

@@ -1,4 +1,4 @@
-import { instance } from "@/redux/common/configs/axios-config";
+import { instance } from "@/app/components/common/configs/axios-config";
 
 export const findAllUsersAPI = async (page: number) => {
   try {

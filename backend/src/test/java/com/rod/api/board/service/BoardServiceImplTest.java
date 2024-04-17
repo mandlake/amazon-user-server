@@ -22,7 +22,7 @@ class BoardServiceImplTest {
     @Test
     @DisplayName("보드 정보 저장")
     void save() {
-        Messenger vo = service.save(BoardDto.builder().boardType("22").build());
+        Messenger vo = service.save(BoardDto.builder().description("22").build());
         assertThat(vo.getMessage()).isEqualTo("True");
     }
 
@@ -34,7 +34,7 @@ class BoardServiceImplTest {
 
     @Test
     void modify() {
-        Messenger vo = service.modify(BoardDto.builder().boardType("22").build());
+        Messenger vo = service.modify(BoardDto.builder().description("22").build());
         assertThat(vo.getMessage()).isEqualTo("True");
     }
 

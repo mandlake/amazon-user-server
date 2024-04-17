@@ -1,4 +1,5 @@
-import { instance } from "@/redux/common/configs/axios-config";
+import { instance } from "@/app/components/common/configs/axios-config";
+import { IArticle } from "../model/article";
 
 export const findAllArticlesAPI = async (page: number) => {
   try {
@@ -10,6 +11,18 @@ export const findAllArticlesAPI = async (page: number) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return error;
+  }
+};
+
+export const findAllArticlesByBoardIdAPI = async (id: number) => {
+  try {
+    const response = await instance.get("/articles/list-by-id", {
+      params: { id },
+    });
+    console.log("success");
+    return response.data;
+  } catch (error) {
     return error;
   }
 };

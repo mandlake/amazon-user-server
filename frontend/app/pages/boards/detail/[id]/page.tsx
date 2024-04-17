@@ -5,8 +5,8 @@ import {
   findBoardById,
   modifiedBoard,
 } from "@/app/components/board/service/board.service";
-import { getBoardById } from "@/app/components/board/service/board.slice";
-import { PG } from "@/redux/common/enums/PG";
+import { getSingleBoard } from "@/app/components/board/service/board.slice";
+import { PG } from "@/app/components/common/enums/PG";
 import { Button, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,19 +16,19 @@ import { useDispatch } from "react-redux";
 const IdPage = (props: any) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const board = useSelector(getBoardById);
+  const board = useSelector(getSingleBoard);
   const [modified, setModified] = useState({
     id: board.id,
-    boardName: board.boardName,
-    boardType: board.boardType,
+    title: board.title,
+    description: board.description,
   });
 
   const onModified = () => {
     dispatch(
       modifiedBoard({
         ...board,
-        boardName: modified.boardName || board.boardName,
-        boardType: modified.boardType || board.boardType,
+        title: modified.title || board.title,
+        description: modified.description || board.description,
       })
     );
     alert("수정이 완료되었습니다.");
@@ -43,6 +43,7 @@ const IdPage = (props: any) => {
 
   useEffect(() => {
     dispatch(findBoardById(props.params.id));
+    console.log(props.params.id);
   }, []);
 
   return (
@@ -64,11 +65,11 @@ const IdPage = (props: any) => {
           <div className="justify-center items-center">
             <span>게시판 이름</span>
             <TextField
-              defaultValue={board.boardName}
+              defaultValue={board.title}
               variant="standard"
               fullWidth
               onChange={(e: any) =>
-                setModified({ ...modified, boardName: e.target.value })
+                setModified({ ...modified, title: e.target.value })
               }
             />
           </div>
@@ -76,11 +77,11 @@ const IdPage = (props: any) => {
           <div className="justify-center items-center">
             <span>게시판 타입</span>
             <TextField
-              defaultValue={board.boardType}
+              defaultValue={board.description}
               variant="standard"
               fullWidth
               onChange={(e: any) =>
-                setModified({ ...modified, boardType: e.target.value })
+                setModified({ ...modified, description: e.target.value })
               }
             />
           </div>

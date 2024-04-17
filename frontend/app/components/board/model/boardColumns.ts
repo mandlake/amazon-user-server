@@ -1,7 +1,7 @@
 interface BoardColumns {
   id?: number;
-  boardName?: string;
-  boardType?: string;
+  title?: string;
+  description?: string;
   registerDate?: string;
   modDate?: string;
 }

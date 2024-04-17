@@ -5,6 +5,7 @@ import {
   findBoardByIdAPI,
   modifiedBoardAPI,
 } from "./board.api";
+import { IArticle } from "../../article/model/article";
 
 export const findAllBoards: any = createAsyncThunk(
   "board/findAllBoards",
@@ -16,7 +17,7 @@ export const findAllBoards: any = createAsyncThunk(
 );
 
 export const findBoardById: any = createAsyncThunk(
-  "articles/findArticleById",
+  "articles/findBoardById",
   async (id: number) => {
     return await findBoardByIdAPI(id);
   }

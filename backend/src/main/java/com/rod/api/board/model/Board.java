@@ -21,19 +21,19 @@ public class Board extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="board_name")
-    private String boardName;
+    @Column(name="title")
+    private String title;
 
-    @Column(name="board_type")
-    private String boardType;
+    @Column(name="description")
+    private String description;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Article> articles;
 
     @Builder(builderMethodName = "builder")
-    public Board(Long id, String boardName, String boardType, List<Article> articles) {
+    public Board(Long id, String title, String description, List<Article> articles) {
         this.id = id;
-        this.boardName = boardName;
-        this.boardType = boardType;
+        this.title = title;
+        this.description = description;
     }
 }

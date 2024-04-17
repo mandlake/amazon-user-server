@@ -1,13 +1,14 @@
 import { GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
-import { PG } from "@/redux/common/enums/PG";
+import { PG } from "@/app/components/common/enums/PG";
 import { Typography } from "@mui/material";
+import { IArticle } from "../model/article";
 
 interface CellType {
-  row: ArticleColumns;
+  row: IArticle;
 }
 
-export default function ArticleColumns(prop: IArticle): GridColDef[] {
+export default function ArticleColumns(data: IArticle): GridColDef[] {
   return [
     {
       flex: 0.04,

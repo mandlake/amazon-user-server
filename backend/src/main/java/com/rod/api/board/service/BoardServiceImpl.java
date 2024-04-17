@@ -42,7 +42,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public Optional<BoardDto> findById(Long id) {
-        return Optional.of(entityToDto(repository.findById(id)));
+        return repository.findById(id).map(i -> entityToDto(Optional.of(i)));
     }
 
     @Override

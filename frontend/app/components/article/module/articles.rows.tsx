@@ -1,5 +1,6 @@
 import { getAllArticles } from "@/app/components/article/service/article.slice";
 import { useSelector } from "react-redux";
+import { IArticle } from "../model/article";
 
 export default function ArticleRows() {
   const allArticles: [] = useSelector(getAllArticles);
@@ -8,6 +9,8 @@ export default function ArticleRows() {
     title: article.title,
     content: article.content,
   }));
+
+  console.log(additionalRows);
 
   return [...(additionalRows || [])];
 }

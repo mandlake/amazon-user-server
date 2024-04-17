@@ -7,7 +7,7 @@ import {
   loginId,
   modifiedUserById,
 } from "./user.service";
-import { initialState } from "./init/userState";
+import { initialState } from "./init/userState.init";
 
 export const userSlice = createSlice({
   name: "users",

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { PG } from "@/redux/common/enums/PG";
+import { PG } from "@/app/components/common/enums/PG";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +33,7 @@ const LoginPage: NextPage = () => {
         });
         console.log(parseCookies().message);
         console.log(parseCookies().token);
-        router.push(`${PG.ARTICLE}/list`);
+        router.push(`${PG.BOARD}/card`);
       }
     }
   }, [handleSubmit]);

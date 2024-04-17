@@ -6,7 +6,7 @@ import {
   modifiedArticle,
 } from "@/app/components/article/service/article.service";
 import { getArticleById } from "@/app/components/article/service/article.slice";
-import { PG } from "@/redux/common/enums/PG";
+import { PG } from "@/app/components/common/enums/PG";
 import { Button, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

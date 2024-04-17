@@ -6,8 +6,8 @@ export default function BoardRows() {
   const allBoards: [] = useSelector(getAllBoards);
   const additionalRows = allBoards.map((boards: IBoard) => ({
     id: boards.id,
-    boardName: boards.boardName,
-    boardType: boards.boardType,
+    title: boards.title,
+    description: boards.description,
     registerDate: boards.registerDate,
   }));
 

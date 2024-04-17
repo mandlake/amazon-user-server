@@ -33,14 +33,13 @@ public class BoardController {
 
     @GetMapping("/list")
     public ResponseEntity<List<BoardDto>> findAll(){
-        log.info("입력받은 정보 : {}" );
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/detail")
-    public ResponseEntity<Optional<BoardDto>> findById(@RequestParam Long id) {
+    public ResponseEntity<BoardDto> findById(@RequestParam("id") long id) {
         log.info("입력받은 정보 : {}", id );
-        return ResponseEntity.ok(service.findById(id));
+        return ResponseEntity.ok(service.findById(id).orElseGet(BoardDto::new));
     }
 
     @PutMapping("/modify")
@@ -50,7 +49,7 @@ public class BoardController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Messenger> deleteById(@RequestParam Long id) {
+    public ResponseEntity<Messenger> deleteById(@RequestParam("id") Long id) {
         log.info("입력받은 정보 : {}", id );
         return ResponseEntity.ok(service.deleteById(id));
     }
@@ -62,7 +61,7 @@ public class BoardController {
 
     @GetMapping("/exists/{id}")
     public ResponseEntity<Messenger> existsById(@PathVariable long id) {
-        service.existsById(0L);
+        service.existsById(id);
         return ResponseEntity.ok(new Messenger());
     }
 }

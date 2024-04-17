@@ -3,9 +3,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import dynamic from "next/dynamic";
-import Header from "./components/layout/header";
+import Header from "./components/common/module/header";
 import { parseCookies } from "nookies";
-import DashHeader from "./components/layout/dashHeader";
+import DashHeader from "./components/common/module/dashHeader";
 
 const ReduxProvider = dynamic(() => import("@/redux/redux-provider"), {
   ssr: false,

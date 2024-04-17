@@ -1,4 +1,4 @@
-import { PG } from "@/redux/common/enums/PG";
+import { PG } from "@/app/components/common/enums/PG";
 import { Typography } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";

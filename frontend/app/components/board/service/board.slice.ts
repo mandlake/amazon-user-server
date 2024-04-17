@@ -1,11 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  deleteBoard,
-  findAllBoards,
-  findBoardById,
-  modifiedBoard,
-} from "./board.service";
-import { initialState } from "./board.init";
+import { findAllBoards, findBoardById } from "./board.service";
+import { initialState } from "./init/boardState.init";
 
 export const boardSlice = createSlice({
   name: "boards",
@@ -18,20 +13,15 @@ export const boardSlice = createSlice({
       })
       .addCase(findBoardById.fulfilled, (state: any, { payload }: any) => {
         state.array = payload;
-      })
-      .addCase(modifiedBoard.fulfilled, (state: any, { payload }: any) => {
-        state.array = payload;
-      })
-      .addCase(deleteBoard.fulfilled, (state: any, { payload }: any) => {
-        state.array = payload;
       });
   },
 });
 
 export const getAllBoards = (state: any) => state.board.array;
-export const getBoardById = (state: any) => state.board.array;
-export const getModifiedBoard = (state: any) => state.board.array;
-export const getDeleteBoard = (state: any) => state.board.array;
+export const getSingleBoard = (state: any) => {
+  console.log(state.board);
+  return state.board.array;
+};
 
 export const {} = boardSlice.actions;
 

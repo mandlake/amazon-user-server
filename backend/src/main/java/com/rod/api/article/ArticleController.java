@@ -37,8 +37,14 @@ public class ArticleController {
         return ResponseEntity.ok(service.findAll());
     }
 
+    @GetMapping("/list-by-id")
+    public ResponseEntity<List<ArticleDto>> findAllById(@RequestParam("id") Long id) {
+        log.info("입력받은 정보 : {}", id );
+        return ResponseEntity.ok(service.findByBoardId(id));
+    }
+
     @GetMapping("/detail")
-    public ResponseEntity<Optional<ArticleDto>> findById(@RequestParam Long id) {
+    public ResponseEntity<Optional<ArticleDto>> findById(@RequestParam("id") Long id) {
         log.info("입력받은 정보 : {}", id );
         return ResponseEntity.ok(service.findById(id));
     }
@@ -50,7 +56,7 @@ public class ArticleController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Messenger> deleteById(@RequestParam Long id) {
+    public ResponseEntity<Messenger> deleteById(@RequestParam("id") Long id) {
         log.info("입력받은 정보 : {}", id);
         return ResponseEntity.ok(service.deleteById(id));
     }

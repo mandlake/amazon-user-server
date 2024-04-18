@@ -2,6 +2,7 @@ package com.rod.api.article.service;
 
 import com.rod.api.article.model.Article;
 import com.rod.api.article.model.ArticleDto;
+import com.rod.api.board.model.Board;
 import com.rod.api.common.service.command.CommandService;
 import com.rod.api.common.service.query.QueryService;
 
@@ -13,6 +14,7 @@ public interface ArticleService extends CommandService<ArticleDto>, QueryService
                 .id(dto.getId())
                 .title(dto.getTitle())
                 .content(dto.getContent())
+                .board(Board.builder().id(dto.getBoard()).build())
                 .build();
     }
 

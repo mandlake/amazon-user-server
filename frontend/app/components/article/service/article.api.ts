@@ -60,3 +60,13 @@ export const deleteArticleAPI = async (id: number) => {
     return error;
   }
 };
+
+export const saveArticleAPI = async (all: IArticle) => {
+  try {
+    const response = await instance.post("/articles/save", all);
+    console.log("success");
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

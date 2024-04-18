@@ -6,5 +6,5 @@ export interface ArticleColumns {
   content?: string;
   registerDate?: string;
   modDate?: string;
-  boardId?: IBoard;
+  board?: IBoard;
 }

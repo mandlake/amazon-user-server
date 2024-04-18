@@ -6,5 +6,5 @@ export interface IArticle {
   content: string;
   registerDate?: string;
   modDate?: string;
-  boardId?: IBoard;
+  board?: number;
 }

@@ -5,6 +5,7 @@ import {
   findAllArticlesByBoardIdAPI,
   findArticleByIdAPI,
   modifiedArticleAPI,
+  saveArticleAPI,
 } from "./article.api";
 import { IArticle } from "../model/article";
 
@@ -42,5 +43,12 @@ export const deleteArticle: any = createAsyncThunk(
   "article/deleteArticle",
   async (id: number) => {
     return await deleteArticleAPI(id);
+  }
+);
+
+export const saveArticle: any = createAsyncThunk(
+  "article/saveArticle",
+  async (all: IArticle) => {
+    return await saveArticleAPI(all);
   }
 );

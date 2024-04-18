@@ -6,9 +6,7 @@ import java.util.stream.Collectors;
 
 import com.rod.api.article.ArticleRepository;
 import com.rod.api.article.model.ArticleDto;
-import com.rod.api.board.BoardRepository;
 import com.rod.api.common.component.Messenger;
-import com.rod.api.user.model.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -14,6 +14,6 @@ public class ArticleDto {
     private Long id;
     private String title;
     private String content;
-    private Board board_id;
-    private User user_id;
+    private Long board;
+    private Long user;
 }

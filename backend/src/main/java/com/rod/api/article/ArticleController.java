@@ -38,9 +38,9 @@ public class ArticleController {
     }
 
     @GetMapping("/list-by-id")
-    public ResponseEntity<List<ArticleDto>> findAllById(@RequestParam("id") Long id) {
+    public ResponseEntity<List<ArticleDto>> findAllByBoardId(@RequestParam("id") Long id) {
         log.info("입력받은 정보 : {}", id );
-        return ResponseEntity.ok(service.findByBoardId(id));
+        return ResponseEntity.ok(service.findAllByBoardId(id));
     }
 
     @GetMapping("/detail")

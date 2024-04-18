@@ -33,7 +33,7 @@ const LoginPage: NextPage = () => {
         });
         console.log(parseCookies().message);
         console.log(parseCookies().token);
-        router.push(`${PG.BOARD}/card`);
+        router.push(`${PG.BOARD}/list`);
       }
     }
   }, [handleSubmit]);

@@ -23,10 +23,9 @@ class ArticleServiceImplTest {
     private ArticleService service;
     @Mock
     private ArticleRepository repository;
-    private BoardRepository board;
     @BeforeEach
     void setUp() {
-        this.service = new ArticleServiceImpl(repository, board);
+        this.service = new ArticleServiceImpl(repository);
     }
 
     private List<Article> getArticles() {

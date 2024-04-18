@@ -1,60 +1,35 @@
 "use client";
 
-import { useEffect } from "react";
-import { NextPage } from "next";
-import { useDispatch, useSelector } from "react-redux";
-import { Box } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import CardButton from "@/app/atoms/button/CardButton";
 import { findAllBoards } from "@/app/components/board/service/board.service";
 import { getAllBoards } from "@/app/components/board/service/board.slice";
-import { IBoard } from "@/app/components/board/model/board";
-import BoardRows from "@/app/components/board/module/boards.rows";
-import BoardColumns from "@/app/components/board/module/boards.columns";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const ArticlesPage: NextPage = ({ data }: any) => {
+export default function BoardCard() {
   const dispatch = useDispatch();
-  const allBoards: [] = useSelector(getAllBoards);
-
-  if (allBoards !== undefined) {
-    console.log("allBoards is defined");
-    console.log(allBoards);
-  } else {
-    console.log("allBoards is undefined");
-  }
+  const allBoards = useSelector(getAllBoards);
 
   useEffect(() => {
     dispatch(findAllBoards(1));
   }, []);
 
-  const columns = BoardColumns({} as IBoard);
-  const rows = BoardRows();
-
   return (
     <>
-      <div className="flex flex-col justify-center items-center mt-10">
-        <h1 className="font-semibold text-stone-600 text-[30px]">
-          게시글 종류
-        </h1>
-
-        <Box sx={{ height: 400, width: "100%" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 5,
-                },
-              },
-            }}
-            pageSizeOptions={[5, 10, 20]}
-            checkboxSelection
-            disableRowSelectionOnClick
-          />
-        </Box>
-      </div>
+      {allBoards !== undefined ? (
+        <div className="flex flex-row gap-3 w-screen items-center">
+          {allBoards.map((board: any) => (
+            <CardButton
+              id={board.id}
+              title={board.title}
+              description={board.description}
+            />
+          ))}
+        </div>
+      ) : (
+        <div>Loading...</div>
+      )}
     </>
   );
-};
-
-export default ArticlesPage;
+}

@@ -5,7 +5,6 @@ import "./globals.css";
 import dynamic from "next/dynamic";
 import Header from "./components/common/module/header";
 import { parseCookies } from "nookies";
-import DashHeader from "./components/common/module/dashHeader";
 
 const ReduxProvider = dynamic(() => import("@/redux/redux-provider"), {
   ssr: false,
@@ -27,7 +26,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {parseCookies().message === "True" && <Header />}
-        {parseCookies().message === "admin" && <DashHeader />}
         <div>
           <ReduxProvider> {children}</ReduxProvider>
         </div>

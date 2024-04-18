@@ -27,9 +27,10 @@ export const linkButtonTitles = [
   { id: 1, title: "회원가입", path: `${PG.USER}/join` },
   { id: 2, title: "로그인", path: "/" },
   { id: 3, title: "카운터", path: `${PG.DEMO}/counter` },
-  { id: 4, title: "게시판목록", path: `${PG.BOARD}/card` },
-  { id: 5, title: "게시글목록", path: `${PG.ARTICLE}/list` },
-  { id: 6, title: "사용자목록", path: `${PG.USER}/list` },
+  { id: 4, title: "게시판목록", path: `${PG.BOARD}/list` },
+  { id: 5, title: "리뷰게시판", path: `${PG.ARTICLE}/list/1` },
+  { id: 6, title: "QNA게시판", path: `${PG.ARTICLE}/list/2` },
+  { id: 7, title: "사용자목록", path: `${PG.USER}/list` },
 ];
 
 export const settings = ["Profile", "Account", "Dashboard", "Logout"];

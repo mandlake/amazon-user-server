@@ -40,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService{
         return repository.findAll().stream().map(i -> entityToDto(Optional.ofNullable(i))).collect(Collectors.toList());
     }
 
-    public List<ArticleDto> findByBoardId(Long id) {
+    public List<ArticleDto> findAllByBoardId(Long id) {
         return repository.findAllByBoardId(id).stream().map(i -> entityToDto(Optional.ofNullable(i))).collect(Collectors.toList());
     }
 

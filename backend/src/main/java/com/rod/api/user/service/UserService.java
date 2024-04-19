@@ -16,6 +16,7 @@ public interface UserService  extends CommandService<UserDto>, QueryService<User
     List<UserDto> findUsersByName(String name);
     List<UserDto> findUsersByJob(String job);
     Optional<User> findUserByUsername(String username);
+    Messenger findByUsername(String username);
 
     default User dtoToEntity(UserDto dto){
         return User.builder()

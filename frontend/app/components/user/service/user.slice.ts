@@ -51,7 +51,7 @@ export const getLoginId = (state: any) => {
 };
 export const existsUsernameMessage = (state: any) => {
   console.log(state.user.auth);
-  return state.user.auth;
+  return state.user.auth.message;
 };
 
 export const {} = userSlice.actions;

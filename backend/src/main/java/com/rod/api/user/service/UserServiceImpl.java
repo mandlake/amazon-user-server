@@ -97,6 +97,7 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
+    @Override
     public Messenger findByUsername(String username) {
         return Messenger.builder().message(repository.findByUsername(username).isPresent() ? "True" : "False").build();
     }

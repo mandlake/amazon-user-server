@@ -18,6 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findUsersByJob(String job);
 
 //    @Modifying
-//    @Query("update users set :id")
+//    @Query("update users set id = :id")
 //    public void modifyTokenById(@Param("id") Long id);
+
 }

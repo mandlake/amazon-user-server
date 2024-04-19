@@ -1,9 +1,10 @@
 package com.rod.api.article.model;
 
-import com.rod.api.board.model.Board;
-import com.rod.api.user.model.User;
 import lombok.*;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 @NoArgsConstructor
@@ -16,4 +17,6 @@ public class ArticleDto {
     private String content;
     private Long board;
     private Long user;
+    private LocalDateTime registerDate;
+    private LocalDate modDate;
 }

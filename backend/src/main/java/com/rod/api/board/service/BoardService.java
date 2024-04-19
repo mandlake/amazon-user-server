@@ -5,6 +5,8 @@ import com.rod.api.board.model.BoardDto;
 import com.rod.api.common.service.command.CommandService;
 import com.rod.api.common.service.query.QueryService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public interface BoardService extends CommandService<BoardDto>, QueryService<BoardDto> {
@@ -22,6 +24,8 @@ public interface BoardService extends CommandService<BoardDto>, QueryService<Boa
                 .id(b.getId())
                 .title(b.getTitle())
                 .description(b.getDescription())
+                .registerDate(LocalDateTime.now())
+                .modDate(LocalDate.now())
                 .build();
     }
 

@@ -12,9 +12,28 @@ const JoinPage: NextPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [join, setJoin] = useState({} as IUser);
+  const ID_CHECK = /^[a-z]+[a-z0-9]{5,19}$/g; // 영어 소문자로 시작하는 6 ~ 20 자의 영어 소문자 또는 숫자
+  const PW_CHECK = /^[a-z]+[a-zA-Z0-9\D]{3,19}$/g; // 영어 소문자로 시작하는 4 ~ 20자의 글자(모두 허용)
 
   const handleSubmit = () => {
     dispatch(joinId(join));
+
+    if (join.username && ID_CHECK.test(join.username)) {
+      console.log("정확한 아이디입니다.");
+    } else {
+      console.log(
+        "잘못된 형식의 아이디입니다. 영어 소문자로 시작하는 6 ~ 20 자의 영어 소문자 또는 숫자로 입력해주세요."
+      );
+    }
+
+    if (join.password && PW_CHECK.test(join.password)) {
+      console.log("정확한 비밀번호입니다.");
+    } else {
+      console.log(
+        "잘못된 비밀번호입니다. 영어 소문자로 시작하는 4 ~ 20자의 글자로 입력해주세요."
+      );
+    }
+
     router.push(`${PG.USER}/login`);
   };
 

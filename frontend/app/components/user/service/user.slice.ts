@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   deleteUserById,
+  existsUsername,
   findAllUsers,
   findUserById,
   joinId,
@@ -32,6 +33,9 @@ export const userSlice = createSlice({
       })
       .addCase(loginId.fulfilled, (state: any, { payload }: any) => {
         state.auth = payload;
+      })
+      .addCase(existsUsername.fulfilled, (state: any, { payload }: any) => {
+        state.auth = payload;
       });
   },
 });
@@ -42,6 +46,10 @@ export const getModifiedUserById = (state: any) => state.user.array;
 export const getDeleteUserById = (state: any) => state.user.array;
 export const getJoinId = (state: any) => state.user.array;
 export const getLoginId = (state: any) => {
+  console.log(state.user.auth);
+  return state.user.auth;
+};
+export const existsUsernameMessage = (state: any) => {
   console.log(state.user.auth);
   return state.user.auth;
 };

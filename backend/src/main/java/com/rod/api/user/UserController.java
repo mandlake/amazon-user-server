@@ -70,4 +70,10 @@ public class UserController {
         return ResponseEntity.ok(service.login(param));
     }
 
+    @GetMapping(path = "/exits-username")
+    public ResponseEntity<Messenger> findByUsername(@RequestParam("username") String username) {
+        log.info("입력받은 정보 : {}", username);
+        return ResponseEntity.ok(service.findByUsername(username));
+    }
+
 }

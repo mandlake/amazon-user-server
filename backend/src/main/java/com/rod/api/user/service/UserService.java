@@ -6,6 +6,8 @@ import com.rod.api.common.service.query.QueryService;
 import com.rod.api.user.model.User;
 import com.rod.api.user.model.UserDto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +39,8 @@ public interface UserService  extends CommandService<UserDto>, QueryService<User
                 .phoneNumber(user.getPhoneNumber())
                 .address(user.getAddress())
                 .job(user.getJob())
+                .registerDate(LocalDateTime.now())
+                .modDate(LocalDate.now())
                 .build();
     }
     Messenger login(UserDto param);

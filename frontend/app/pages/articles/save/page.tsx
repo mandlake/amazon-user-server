@@ -2,12 +2,15 @@
 
 import { IArticle } from "@/app/components/article/model/article";
 import { saveArticle } from "@/app/components/article/service/article.service";
+import { PG } from "@/app/components/common/enums/PG";
 import { MyTypography } from "@/app/components/common/style/cell";
 import { AttachFile, FmdGood, ThumbUpAlt } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 export default function SaveArticle() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [selectedArticle, setSelectedArticle] = useState(0);
   const [article, setArticle] = useState({} as IArticle);
@@ -22,11 +25,12 @@ export default function SaveArticle() {
   const handleInput = (e: any) => {
     setArticle({ ...article, content: e.target.value });
   };
-  const handleCancle = () => {
+  const handleCancel = () => {
     setArticle({} as IArticle);
   };
   const handleSubmit = () => {
     dispatch(saveArticle(article));
+    router.push(`${PG.ARTICLE}/list/${article.board}`);
   };
 
   return (
@@ -99,7 +103,7 @@ export default function SaveArticle() {
         </div>
         <div className="buttons flex">
           <button
-            onClick={handleCancle}
+            onClick={handleCancel}
             className="btn  overflow-hidden relative w-30 bg-white text-blue-500 p-3 px-4 rounded-xl font-bold uppercase -- before:block before:absolute before:h-full before:w-1/2 before:rounded-full
     before:bg-pink-400 before:top-0 before:left-1/4 before:transition-transform before:opacity-0 before:hover:opacity-100 hover:text-200 hover:before:animate-ping transition-all duration-00"
           >

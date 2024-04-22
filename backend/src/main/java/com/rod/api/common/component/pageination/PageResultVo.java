@@ -1,4 +1,4 @@
-package com.rod.api.common.component;
+package com.rod.api.common.component.pageination;
 
 import lombok.*;
 import org.springframework.data.domain.Page;

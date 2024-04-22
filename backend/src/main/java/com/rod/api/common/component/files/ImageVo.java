@@ -1,4 +1,4 @@
-package com.rod.api.common.component;
+package com.rod.api.common.component.files;
 
 import lombok.*;
 import org.springframework.stereotype.Component;

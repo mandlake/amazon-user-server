@@ -1,6 +1,5 @@
 "use client";
 
-import MoveButton from "@/app/atoms/button/MoveButton";
 import {
   deleteArticle,
   findArticleById,

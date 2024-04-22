@@ -9,14 +9,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import { findAllArticlesByBoardId } from "@/app/components/article/service/article.service";
 import ArticleColumns from "@/app/components/article/module/articles.columns";
 import { IArticle } from "@/app/components/article/model/article";
-import { linkButtonTitles } from "@/app/atoms/button/LinkButton";
+import { listButtonTitles } from "@/app/atoms/button/LinkButton";
 
 const ArticlesPageByBoardId: NextPage = (props: any) => {
   const dispatch = useDispatch();
   const allArticles: [] = useSelector(getAllArticlesByBoardId);
   const [selectedArticle, setSelectedArticle] = useState(props.params.id);
   const link =
-    linkButtonTitles[3 + parseInt(selectedArticle || props.params.id)];
+    listButtonTitles[parseInt(selectedArticle || props.params.id) - 1];
 
   if (allArticles !== undefined) {
     console.log("allArticles is defined");

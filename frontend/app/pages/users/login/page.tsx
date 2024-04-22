@@ -6,16 +6,12 @@ import { PG } from "@/app/components/common/enums/PG";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  existsUsernameMessage,
-  getLoginId,
-} from "@/app/components/user/service/user.slice";
+import { existsUsernameMessage } from "@/app/components/user/service/user.slice";
 import {
   existsUsername,
   loginId,
 } from "@/app/components/user/service/user.service";
-import { parseCookies, setCookie } from "nookies";
-import { jwtDecode } from "jwt-decode";
+import { setCookie } from "nookies";
 
 const LoginPage: NextPage = () => {
   const router = useRouter();
@@ -74,11 +70,12 @@ const LoginPage: NextPage = () => {
         if (res.payload.message == "True") {
           dispatch(loginId(user)).then((res: any) => {
             if (res.payload.message == "True") {
+              console.log(res.payload.accessToken);
               setCookie({}, "message", res.payload.message, {
                 httpOnly: false,
                 path: "/",
               });
-              setCookie({}, "token", res.payload.token, {
+              setCookie({}, "accessToken", res.payload.accessToken, {
                 httpOnly: false,
                 path: "/",
               });
@@ -119,7 +116,6 @@ const LoginPage: NextPage = () => {
   }, [message]);
 
   useEffect(() => {
-    // 페이지 로드 시 Redux 상태 초기화
     setIsNoneId(false);
     setEnter({ id: false, pw: false, none: false });
   }, []);

@@ -1,4 +1,4 @@
-package com.rod.api.common.component;
+package com.rod.api.common.component.pageination;
 
 import lombok.*;
 import org.springframework.data.domain.PageRequest;
@@ -6,21 +6,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @Getter
 @Builder
 @AllArgsConstructor
-public class PageRequestFileVo {
+public class PageRequestVo {
     private int page;
     private int size;
     private String type;
     private String keyword;
 
-    private List<?> pageFileDto;
-
-    public PageRequestFileVo() {
+    public PageRequestVo() {
         this.page = 1;
         this.size = 10;
     }

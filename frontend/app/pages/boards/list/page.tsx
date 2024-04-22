@@ -25,6 +25,7 @@ export default function BoardCard() {
           <div className="flex flex-row gap-3 w-screen items-center">
             {allBoards.map((board: any) => (
               <CardButton
+                key={board.id}
                 id={board.id}
                 title={board.title}
                 description={board.description}

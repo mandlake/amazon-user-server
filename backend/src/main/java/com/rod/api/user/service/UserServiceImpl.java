@@ -1,6 +1,6 @@
 package com.rod.api.user.service;
 
-import com.rod.api.common.component.JwtProvider;
+import com.rod.api.common.component.sequrity.JwtProvider;
 import com.rod.api.common.component.Messenger;
 import com.rod.api.user.UserRepository;
 import com.rod.api.user.model.User;
@@ -82,20 +82,15 @@ public class UserServiceImpl implements UserService {
         String token = jwtProvider.createToken(entityToDto(Optional.of(user)));
         boolean flag = user.getPassword().equals(param.getPassword());
 
-        // 토큰을 각 섹션(Header, Payload, Signature)으로 분할
-        String[] chunks = token.split("\\.");
-        Base64.Decoder decoder = Base64.getUrlDecoder();
-        String header = new String(decoder.decode(chunks[0]));
-        String payload = new String(decoder.decode(chunks[1]));
-
-        log.info(header);
-        log.info(payload);
+        String payload = jwtProvider.getPayload(token);
 
         return Messenger.builder()
                 .message(flag ? "True" : "False")
-                .token(flag ? token : "None")
+                .accessToken(flag ? token : "None")
                 .build();
     }
+
+
 
     @Override
     public Messenger findByUsername(String username) {

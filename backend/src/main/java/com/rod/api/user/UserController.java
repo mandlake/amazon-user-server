@@ -76,4 +76,8 @@ public class UserController {
         return ResponseEntity.ok(service.findByUsername(username));
     }
 
+    @GetMapping(path = "/logout")
+    public ResponseEntity<Messenger> logout() {
+        return ResponseEntity.ok(null);
+    }
 }

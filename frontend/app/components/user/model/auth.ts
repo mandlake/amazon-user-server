@@ -1,4 +1,4 @@
 interface IAuth {
   message?: string;
-  token?: string;
+  accesstoken?: string;
 }

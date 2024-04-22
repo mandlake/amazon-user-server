@@ -6,6 +6,7 @@ import {
   findUserByIdAPI,
   joinIdAPI,
   loginIdAPI,
+  logoutAPI,
   modifiedUserByIdAPI,
 } from "./user.api";
 
@@ -58,4 +59,9 @@ export const existsUsername: any = createAsyncThunk(
   async (username: string) => {
     return await existsUsernameAPI(username);
   }
+);
+
+export const logout: any = createAsyncThunk(
+  "users/logout",
+  async () => await logoutAPI()
 );

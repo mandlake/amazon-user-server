@@ -43,8 +43,18 @@ const IdPage = (props: any) => {
   };
 
   useEffect(() => {
-    dispatch(findArticleById(props.params.id));
-  }, []);
+    dispatch(findArticleById(props.params.id))
+      .then((response: any) => {
+        setModified({
+          id: response.payload.id,
+          title: response.payload.title,
+          content: response.payload.content,
+        });
+      })
+      .catch((error: any) => {
+        console.error("Error fetching article:", error);
+      });
+  }, [dispatch, props.params.id]);
 
   return (
     <>

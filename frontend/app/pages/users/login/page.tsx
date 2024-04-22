@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PG } from "@/app/components/common/enums/PG";
 import { NextPage } from "next";
@@ -18,9 +18,10 @@ import { parseCookies, setCookie } from "nookies";
 import { jwtDecode } from "jwt-decode";
 
 const LoginPage: NextPage = () => {
-  // const loginMessage = useSelector(getLoginId);
   const router = useRouter();
   const dispatch = useDispatch();
+  const idRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState({} as IUser);
   const message = useSelector(existsUsernameMessage);
   const [isWrongId, setIsWrongId] = useState(true);
@@ -33,7 +34,7 @@ const LoginPage: NextPage = () => {
   });
 
   const handleId = (e: any) => {
-    const ID_CHECK = /^[a-z]+[a-z0-9]{5,19}$/g; // 영어 소문자로 시작하는 6 ~ 20 자의 영어 소문자 또는 숫자
+    const ID_CHECK = /^[a-z]{1,4}[a-z0-9]{5,19}$/; // 영어 소문자로 시작하는 6 ~ 20 자의 영어 소문자 또는 숫자
 
     if (ID_CHECK.test(e.target.value)) {
       console.log("정확한 아이디입니다.");
@@ -49,7 +50,7 @@ const LoginPage: NextPage = () => {
     setUser({ ...user, username: e.target.value });
   };
   const handlePw = (e: any) => {
-    const PW_CHECK = /^[a-z]+[a-zA-Z0-9\D]{3,19}$/g; // 영어 소문자로 시작하는 4 ~ 20자의 글자(모두 허용)
+    const PW_CHECK = /^[a-z]{1,2}[a-zA-Z0-9\D]{3,19}$/g; // 영어 소문자로 시작하는 4 ~ 20자의 글자(모두 허용)
 
     if (PW_CHECK.test(e.target.value)) {
       console.log("정확한 비밀번호입니다.");
@@ -68,29 +69,53 @@ const LoginPage: NextPage = () => {
   const handleSubmit = () => {
     console.log(typeof user.username);
     setEnter({ ...enter, none: true });
-    dispatch(existsUsername(user.username));
-    // dispatch(loginId(user));
+    dispatch(existsUsername(user.username))
+      .then((res: any) => {
+        if (res.payload.message == "True") {
+          dispatch(loginId(user)).then((res: any) => {
+            if (res.payload.message == "True") {
+              setCookie({}, "message", res.payload.message, {
+                httpOnly: false,
+                path: "/",
+              });
+              setCookie({}, "token", res.payload.token, {
+                httpOnly: false,
+                path: "/",
+              });
+              router.push(`${PG.BOARD}/list`);
+            } else {
+              console.log("로그인에 실패했습니다.");
 
-    // router.push(`${PG.BOARD}/list`);
+              if (passwordRef.current) {
+                passwordRef.current.value = "";
+              }
+              if (idRef.current) {
+                idRef.current.value = "";
+              }
+            }
+          });
+        } else {
+          console.log("아이디가 존재하지 않습니다. 회원가입을 진행해주세요.");
+        }
+      })
+      .catch((err: any) => {
+        console.log("err :");
+        console.log(err);
+
+        if (passwordRef.current) {
+          passwordRef.current.value = "";
+        }
+        if (idRef.current) {
+          idRef.current.value = "";
+        }
+      })
+      .finally(() => {
+        console.log("최종 로직");
+      });
   };
+
   useEffect(() => {
     setIsNoneId(message === "True" ? false : true);
-
-    // if (loginMessage !== undefined) {
-    //   if (loginMessage.message === "True") {
-    //     setCookie({}, "message", loginMessage.message, {
-    //       httpOnly: false,
-    //       path: "/",
-    //     });
-    //     setCookie({}, "token", loginMessage.token, {
-    //       httpOnly: false,
-    //       path: "/",
-    //     });
-    //     console.log(parseCookies().message);
-    //     console.log(parseCookies().token);
-    //     console.log(jwtDecode<any>(parseCookies().token));
-    //   }
-    // }
   }, [message]);
 
   useEffect(() => {
@@ -113,6 +138,7 @@ const LoginPage: NextPage = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              ref={idRef}
               id="username"
               type="text"
               onChange={handleId}
@@ -159,6 +185,7 @@ const LoginPage: NextPage = () => {
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              ref={passwordRef}
               id="password"
               type="password"
               onChange={handlePw}

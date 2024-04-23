@@ -44,5 +44,8 @@ public interface UserService  extends CommandService<UserDto>, QueryService<User
                 .modDate(LocalDate.now())
                 .build();
     }
+
     Messenger login(UserDto param);
+
+    Messenger logout(String accessToken);
 }

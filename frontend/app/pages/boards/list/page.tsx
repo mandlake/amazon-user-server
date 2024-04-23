@@ -9,12 +9,14 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
-export default function BoardCard() {
+const BoardCard = () => {
   const dispatch = useDispatch();
   const allBoards = useSelector(getAllBoards);
 
   useEffect(() => {
-    dispatch(findAllBoards(1));
+    dispatch(findAllBoards(1)).then((res: any) => {
+      console.log(res.payload);
+    });
   }, []);
 
   return (
@@ -38,4 +40,6 @@ export default function BoardCard() {
       )}
     </>
   );
-}
+};
+
+export default BoardCard;

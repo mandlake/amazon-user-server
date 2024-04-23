@@ -3,7 +3,7 @@ import { IBoard } from "../model/board";
 
 export const findAllBoardsAPI = async (page: number) => {
   try {
-    const response = await instance.get("/boards/list", {
+    const response = await instance().get("/boards/list", {
       params: { page, limit: 10 },
     });
 
@@ -17,7 +17,7 @@ export const findAllBoardsAPI = async (page: number) => {
 
 export const findBoardByIdAPI = async (id: number) => {
   try {
-    const response = await instance.get("/boards/detail", {
+    const response = await instance().get("/boards/detail", {
       params: { id },
     });
     return response.data;
@@ -28,7 +28,7 @@ export const findBoardByIdAPI = async (id: number) => {
 
 export const modifiedBoardAPI = async (all: IBoard) => {
   try {
-    const response = await instance.put("/boards/modify", all);
+    const response = await instance().put("/boards/modify", all);
     console.log("success");
     return response.data;
   } catch (error) {
@@ -38,7 +38,7 @@ export const modifiedBoardAPI = async (all: IBoard) => {
 
 export const deleteBoardAPI = async (id: number) => {
   try {
-    const response = await instance.delete("/boards/delete", {
+    const response = await instance().delete("/boards/delete", {
       params: { id },
     });
     console.log("success");

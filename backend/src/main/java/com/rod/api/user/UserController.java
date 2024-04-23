@@ -64,20 +64,9 @@ public class UserController {
         return ResponseEntity.ok(service.findUsersByName(param.getName()));
     }
 
-    @PostMapping(path = "/login")
-    public ResponseEntity<Messenger> login(@RequestBody UserDto param) {
-        log.info("입력받은 정보 : {}", param );
-        return ResponseEntity.ok(service.login(param));
-    }
-
-    @GetMapping(path = "/exits-username")
-    public ResponseEntity<Messenger> findByUsername(@RequestParam("username") String username) {
-        log.info("입력받은 정보 : {}", username);
-        return ResponseEntity.ok(service.findByUsername(username));
-    }
-
-    @GetMapping(path = "/logout")
-    public ResponseEntity<Messenger> logout() {
-        return ResponseEntity.ok(null);
+    @GetMapping("/logout")
+    public ResponseEntity<Messenger> logout(@RequestHeader("Authorization") String accessToken){
+        log.info("logout request : {}", accessToken);
+        return ResponseEntity.ok(service.logout(accessToken));
     }
 }

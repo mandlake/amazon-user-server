@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,7 +81,7 @@ public class UserServiceImpl implements UserService {
         String token = jwtProvider.createToken(entityToDto(Optional.of(user)));
         boolean flag = user.getPassword().equals(param.getPassword());
 
-        String payload = jwtProvider.getPayload(token);
+        jwtProvider.printPayload(token);
 
         return Messenger.builder()
                 .message(flag ? "True" : "False")
@@ -90,7 +89,12 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
-
+    @Override
+    public Messenger logout(String accessToken) {
+        Long id = 1L;
+        boolean flag = true;
+        return Messenger.builder().build();
+    }
 
     @Override
     public Messenger findByUsername(String username) {

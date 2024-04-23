@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import { PG } from "@/app/components/common/enums/PG";
 import { NextPage } from "next";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import { existsUsernameMessage } from "@/app/components/user/service/user.slice";
+import { useDispatch } from "react-redux";
 import {
   existsUsername,
   loginId,
@@ -19,7 +18,6 @@ const LoginPage: NextPage = () => {
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState({} as IUser);
-  const message = useSelector(existsUsernameMessage);
   const [isWrongId, setIsWrongId] = useState(true);
   const [isWrongPw, setIsWrongPw] = useState(true);
   const [isNoneId, setIsNoneId] = useState(false);
@@ -68,6 +66,7 @@ const LoginPage: NextPage = () => {
     dispatch(existsUsername(user.username))
       .then((res: any) => {
         if (res.payload.message == "True") {
+          setIsNoneId(false);
           dispatch(loginId(user)).then((res: any) => {
             if (res.payload.message == "True") {
               console.log(res.payload.accessToken);
@@ -92,6 +91,7 @@ const LoginPage: NextPage = () => {
             }
           });
         } else {
+          setIsNoneId(true);
           console.log("아이디가 존재하지 않습니다. 회원가입을 진행해주세요.");
         }
       })
@@ -110,10 +110,6 @@ const LoginPage: NextPage = () => {
         console.log("최종 로직");
       });
   };
-
-  useEffect(() => {
-    setIsNoneId(message === "True" ? false : true);
-  }, [message]);
 
   useEffect(() => {
     setIsNoneId(false);

@@ -1,6 +1,7 @@
 package com.rod.api.common.component.sequrity;
 
 import com.rod.api.user.model.UserDto;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ public class JwtProvider  {
     private String issuer;
 
     private final SecretKey secretKey;
+
     Instant expiredDate = Instant.now().plus(1, ChronoUnit.DAYS);
 
 
@@ -46,7 +48,7 @@ public class JwtProvider  {
         return token;
     }
 
-    public String getPayload(String token) {
+    public void printPayload(String token) {
         // 토큰을 각 섹션(Header, Payload, Signature)으로 분할
         String[] chunks = token.split("\\.");
         Base64.Decoder decoder = Base64.getUrlDecoder();
@@ -55,15 +57,14 @@ public class JwtProvider  {
 
         log.info(header);
         log.info(payload);
-
-        return payload;
     }
 
     public String extractTokenFromHeader(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
+        return bearerToken != null && bearerToken.startsWith("Bearer ") ? bearerToken.substring(7) : "undefined";
+    }
+
+    public Claims getPayload(String token) {
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload();
     }
 }

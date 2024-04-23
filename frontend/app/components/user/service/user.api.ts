@@ -2,7 +2,7 @@ import instance from "../../common/configs/axios-config";
 
 export const findAllUsersAPI = async (page: number) => {
   try {
-    const response = await instance.get("/users/list", {
+    const response = await instance().get("/users/list", {
       params: { page, size: 5, limit: 5 },
     });
 
@@ -17,7 +17,7 @@ export const findAllUsersAPI = async (page: number) => {
 
 export const findUserByIdAPI = async (id: number) => {
   try {
-    const response = await instance.get("/users/detail", {
+    const response = await instance().get("/users/detail", {
       params: { id },
     });
     return response.data;
@@ -28,7 +28,7 @@ export const findUserByIdAPI = async (id: number) => {
 
 export const modifiedUserByIdAPI = async (all: IUser) => {
   try {
-    const response = await instance.put("/users/modify", all);
+    const response = await instance().put("/users/modify", all);
     console.log("success");
     return response.data;
   } catch (error) {
@@ -38,7 +38,7 @@ export const modifiedUserByIdAPI = async (all: IUser) => {
 
 export const deleteUserByIdAPI = async (id: number) => {
   try {
-    const response = await instance.delete("/users/delete", {
+    const response = await instance().delete("/users/delete", {
       params: { id },
     });
     console.log("success");
@@ -50,7 +50,7 @@ export const deleteUserByIdAPI = async (id: number) => {
 
 export const joinIdAPI = async (all: IUser) => {
   try {
-    const response = await instance.post("/users/save", all);
+    const response = await instance().post("/users/save", all);
     console.log("success");
     return response.data;
   } catch (error) {
@@ -60,7 +60,7 @@ export const joinIdAPI = async (all: IUser) => {
 
 export const loginIdAPI = async (user: IUser) => {
   try {
-    const response = await instance.post("/users/login", user);
+    const response = await instance().post("/auth/login", user);
     console.log("success");
     return response.data;
   } catch (error) {
@@ -70,7 +70,7 @@ export const loginIdAPI = async (user: IUser) => {
 
 export const existsUsernameAPI = async (username: string) => {
   try {
-    const response = await instance.get("/users/exits-username", {
+    const response = await instance().get("/auth/exits-username", {
       params: { username },
     });
     console.log("success");
@@ -82,9 +82,7 @@ export const existsUsernameAPI = async (username: string) => {
 
 export const logoutAPI = async () => {
   try {
-    const response = await instance.get(`/users/exists-username`, {
-      params: {},
-    });
+    const response = await instance().get(`/users/logout`);
     console.log("logoutAPI 결과: " + response.data);
     return response.data;
   } catch (error) {

@@ -30,12 +30,6 @@ export const userSlice = createSlice({
       })
       .addCase(joinId.fulfilled, (state: any, { payload }: any) => {
         state.array = payload;
-      })
-      .addCase(loginId.fulfilled, (state: any, { payload }: any) => {
-        state.auth = payload;
-      })
-      .addCase(existsUsername.fulfilled, (state: any, { payload }: any) => {
-        state.auth = payload;
       });
   },
 });
@@ -45,14 +39,6 @@ export const getUserById = (state: any) => state.user.json;
 export const getModifiedUserById = (state: any) => state.user.array;
 export const getDeleteUserById = (state: any) => state.user.array;
 export const getJoinId = (state: any) => state.user.array;
-export const getLoginId = (state: any) => {
-  console.log(state.user.auth);
-  return state.user.auth;
-};
-export const existsUsernameMessage = (state: any) => {
-  console.log(state.user.auth);
-  return state.user.auth.message;
-};
 
 export const {} = userSlice.actions;
 

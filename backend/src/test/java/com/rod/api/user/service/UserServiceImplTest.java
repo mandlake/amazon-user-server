@@ -21,7 +21,7 @@ class UserServiceImplTest {
     @Test
     @DisplayName("유저 정보 저장")
     void save() {
-        Messenger vo = service.save(UserDto.builder()
+        var vo = service.save(UserDto.builder()
                 .password("password")
                 .build());
         assertThat(vo.getMessage()).isEqualTo("True");
@@ -30,42 +30,42 @@ class UserServiceImplTest {
     @Test
     @DisplayName("유저 제거")
     void deleteById() {
-        Messenger vo = service.deleteById(1L);
+        var vo = service.deleteById(1L);
         assertThat(vo.getMessage()).isEqualTo("True");
     }
 
     @Test
     @DisplayName("유저 정보 전부 불러오기")
     void findAll() {
-        List<UserDto> dtos = service.findAll();
+        var dtos = service.findAll();
         assertThat(dtos.size()).isEqualTo(15);
     }
 
     @Test
     @DisplayName("아이디로 유저 정보 불러오기")
     void findById() {
-        Optional<UserDto> dto = service.findById(1L);
+        var dto = service.findById(1L);
         assertThat(dto.isPresent()).isTrue();
     }
 
     @Test
     @DisplayName("가입된 회원 수")
     void count() {
-        long totalUsers = service.count();
+        var totalUsers = service.count();
         assertThat(totalUsers).isEqualTo(15L);
     }
 
     @Test
     @DisplayName("유저 정보 찾기")
     void existsById() {
-        boolean exists = service.existsById(1L);
+        var exists = service.existsById(1L);
         assertThat(exists).isTrue();
     }
 
     @Test
     @DisplayName("정보 수정하기")
     void modify() {
-        Messenger modify = service.modify(UserDto.builder()
+        var modify = service.modify(UserDto.builder()
                 .password("password")
                 .build());
         assertThat(modify.getMessage()).isEqualTo("True");

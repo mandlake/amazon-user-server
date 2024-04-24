@@ -22,9 +22,9 @@ const BoardCard = () => {
   return (
     <>
       {allBoards !== undefined ? (
-        <div>
-          <MoveButton title={"게시글 작성"} path={`${PG.ARTICLE}/save`} />
-          <div className="flex flex-row gap-3 w-screen items-center">
+        <div className="flex flex-col items-start m-5">
+          <h1 className="m-3 text-slate-900">게시판 목록</h1>
+          <div className="flex flex-row gap-3 w-screen items-center m-3">
             {allBoards.map((board: any) => (
               <CardButton
                 key={board.id}
@@ -33,6 +33,9 @@ const BoardCard = () => {
                 description={board.description}
               />
             ))}
+          </div>
+          <div className="m-3">
+            <MoveButton title={"게시글 작성"} path={`${PG.ARTICLE}/save`} />
           </div>
         </div>
       ) : (

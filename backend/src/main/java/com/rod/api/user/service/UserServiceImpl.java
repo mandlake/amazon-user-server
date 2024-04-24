@@ -77,9 +77,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public Messenger login(UserDto param) {
-        User user = repository.findByUsername(param.getUsername()).get();
-        String token = jwtProvider.createToken(entityToDto(Optional.of(user)));
-        boolean flag = user.getPassword().equals(param.getPassword());
+        var user = repository.findByUsername(param.getUsername()).get();
+        var token = jwtProvider.createToken(entityToDto(Optional.of(user)));
+        var flag = user.getPassword().equals(param.getPassword());
 
         jwtProvider.printPayload(token);
 
@@ -91,8 +91,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Messenger logout(String accessToken) {
-        Long id = 1L;
-        boolean flag = true;
+        var id = 1L;
+        var flag = true;
         return Messenger.builder().build();
     }
 

@@ -3,7 +3,6 @@ package com.rod.api.article.service;
 import com.rod.api.article.ArticleRepository;
 import com.rod.api.article.model.Article;
 import com.rod.api.article.model.ArticleDto;
-import com.rod.api.board.BoardRepository;
 import com.rod.api.common.component.Messenger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

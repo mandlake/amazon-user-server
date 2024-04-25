@@ -27,13 +27,18 @@ public class Board extends BaseEntity {
     @Column(name="description")
     private String description;
 
+    @Column(name="content")
+    private String content;
+
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Article> articles;
 
     @Builder(builderMethodName = "builder")
-    public Board(Long id, String title, String description, List<Article> articles) {
+    public Board(Long id, String title, String description, List<Article> articles, String content) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.articles = articles;
+        this.content = content;
     }
 }

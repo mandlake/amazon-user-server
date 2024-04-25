@@ -8,6 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,14 +36,14 @@ public class SubstringDemo {
         var human7 = "120101-7";
         var human8 = "050101-8";
 
-        log.info("human1 성별: {}, 나이: {}", gender(human1), age(human1));
-        log.info("human2 성별: {}, 나이: {}", gender(human2), age(human2));
-        log.info("human3 성별: {}, 나이: {}", gender(human3), age(human3));
-        log.info("human4 성별: {}, 나이: {}", gender(human4), age(human4));
-        log.info("human5 성별: {}, 나이: {}", gender(human5), age(human5));
-        log.info("human6 성별: {}, 나이: {}", gender(human6), age(human6));
-        log.info("human7 성별: {}, 나이: {}", gender(human7), age(human7));
-        log.info("human8 성별: {}, 나이: {}", gender(human8), age(human8));
+        log.info("human1 성별: {}, 한국 나이: {}, 만 나이: {}", gender(human1), korean_age(human1), getAgeWithLambda(human1));
+        log.info("human2 성별: {}, 한국 나이: {}, 만 나이: {}", gender(human2), korean_age(human2), age(human2));
+        log.info("human3 성별: {}, 한국 나이: {}, 만 나이: {}", gender(human3), korean_age(human3), age(human3));
+        log.info("human4 성별: {}, 한국 나이: {}, 만 나이: {}", gender(human4), korean_age(human4), age(human4));
+        log.info("human5 성별: {}, 한국 나이: {}, 만 나이: {}", gender(human5), korean_age(human5), age(human5));
+        log.info("human6 성별: {}, 한국 나이: {}, 만 나이: {}", gender(human6), korean_age(human6), age(human6));
+        log.info("human7 성별: {}, 한국 나이: {}, 만 나이: {}", gender(human7), korean_age(human7), age(human7));
+        log.info("human8 성별: {}, 한국 나이: {}, 만 나이: {}", gender(human8), korean_age(human8), age(human8));
     }
 
     public String gender(String human) {
@@ -53,11 +54,20 @@ public class SubstringDemo {
 
     public int age(String human) {
         var now = LocalDate.now();
-        var curr = String.format(now.format(DateTimeFormatter.ofPattern("YYYYMMdd"))); // 20240424
-        var curr_year = Integer.parseInt(curr);
+        var current = Integer.parseInt(now.format(DateTimeFormatter.ofPattern("yyyyMMdd"))); // 20240424
         var arr = human.split("-");
-        var year = change_year(arr); // 20000303
-        return (curr_year - year) / 10000; // 24
+        var year = change_year(arr);                                                         // 20000303
+        return (current - year) / 10000;                                                     // 24
+    }
+
+    public int korean_age(String human) {
+        var now = LocalDate.now();
+        var current = Integer.parseInt(now.format(DateTimeFormatter.ofPattern("yyyyMMdd"))); // 20240424
+        var date = Integer.parseInt(now.format(DateTimeFormatter.ofPattern("MMdd")));        // 0424
+        var arr = human.split("-");
+        var year = change_year(arr);                                                         // 20000303
+        var human_date = Integer.parseInt(arr[0].substring(2));                     // 0303
+        return human_date > date ? (current - year) / 10000 + 2 : (current - year) / 10000 + 1;
     }
 
     public int change_year(String[] arr) {
@@ -70,5 +80,17 @@ public class SubstringDemo {
             case "3", "4", "7", "8" -> int_year + 20000000;
             default -> int_year + 18000000;
         };
+    }
+
+    public int getAgeWithLambda(String human) {
+        return Stream.of(human)
+                .map(i -> i.split("-"))
+                .map(i -> switch (i[1]) {
+                    case "1", "2", "5", "6" -> Integer.parseInt(i[0]) + 19000000;
+                    case "3", "4", "7", "8" -> Integer.parseInt(i[0]) + 20000000;
+                    default -> Integer.parseInt(i[0]) + 18000000;
+                })
+                .map(i -> (Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))) - i) / 10000)
+                .findAny().orElseThrow();
     }
 }

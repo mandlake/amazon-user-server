@@ -2,11 +2,12 @@
 
 import { IArticle } from "@/app/components/article/model/article";
 import { saveArticle } from "@/app/components/article/service/article.service";
+import { findAllBoards } from "@/app/components/board/service/board.service";
 import { PG } from "@/app/components/common/enums/PG";
 import { MyTypography } from "@/app/components/common/style/cell";
 import { AttachFile, FmdGood, ThumbUpAlt } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 export default function SaveArticle() {
@@ -14,6 +15,7 @@ export default function SaveArticle() {
   const dispatch = useDispatch();
   const [selectedArticle, setSelectedArticle] = useState(0);
   const [article, setArticle] = useState({} as IArticle);
+  const [options, setOptions] = useState([]);
 
   const handleSelect = (e: any) => {
     setArticle({ ...article, board: e.target.value });
@@ -33,6 +35,12 @@ export default function SaveArticle() {
     router.push(`${PG.ARTICLE}/list/${article.board}`);
   };
 
+  useEffect(() => {
+    dispatch(findAllBoards(1)).then((res: any) => {
+      setOptions(res.payload);
+    });
+  }, []);
+
   return (
     <>
       {MyTypography("게시글 작성", "1.5rem")}
@@ -41,7 +49,7 @@ export default function SaveArticle() {
           htmlFor="articles"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Select article
+          Select Article
         </label>
         <select
           id="articles"
@@ -49,9 +57,11 @@ export default function SaveArticle() {
           value={selectedArticle}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option value={0}>게시글을 골라주세요</option>
-          <option value={1}>리뷰 게시판</option>
-          <option value={2}>QNA 게시판</option>
+          {options.map((item: any) => (
+            <option key={item.id} title={item.title}>
+              {item.content}
+            </option>
+          ))}
         </select>
       </form>
 

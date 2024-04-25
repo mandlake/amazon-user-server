@@ -65,10 +65,12 @@ const LoginPage: NextPage = () => {
     setEnter({ ...enter, none: true });
     dispatch(existsUsername(user.username))
       .then((res: any) => {
+        console.log(res.payload.message);
         if (res.payload.message == "True") {
           setIsNoneId(false);
           dispatch(loginId(user)).then((res: any) => {
-            if (res.payload.message == "True") {
+            console.log(res.payload.message);
+            if (res.payload.message == "Login") {
               console.log(res.payload.accessToken);
               setCookie({}, "message", res.payload.message, {
                 httpOnly: false,

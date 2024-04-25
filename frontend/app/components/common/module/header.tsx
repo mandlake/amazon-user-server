@@ -9,19 +9,21 @@ import { logout } from "../../user/service/user.service";
 import { useDispatch } from "react-redux";
 
 function Header() {
-  const showHeader = parseCookies().message === "True";
+  const [showHeader, setShowHeader] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
   const [isNone, setIsNone] = useState(true);
 
   useEffect(() => {
     console.log("헤더 useEffect 쿠키 : " + parseCookies().accessToken);
-    if (parseCookies().accessToken !== "") {
+    if (parseCookies().accessToken !== undefined) {
       console.log("쿠키가 있어서 보임");
       setIsNone(true);
+      setShowHeader(true);
     } else {
       console.log("쿠키가 있어서 안보임");
       setIsNone(false);
+      setShowHeader(false);
     }
   }, [parseCookies().accessToken]);
 
@@ -33,9 +35,14 @@ function Header() {
     console.log("로그아웃 적용 전 : " + parseCookies().accessToken);
     dispatch(logout())
       .then((res: any) => {
-        destroyCookie(null, "accessToken");
-        setIsNone(false);
-        router.push("/");
+        if (res.payload.message == "Logout") {
+          destroyCookie(null, "accessToken");
+          setIsNone(false);
+          setShowHeader(false);
+          router.push("/");
+        } else {
+          console.log("로그아웃 실패");
+        }
       })
       .catch((error: any) => {
         console.log("로그아웃 실행에서 에러가 발생함 : ");

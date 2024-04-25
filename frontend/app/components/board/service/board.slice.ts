@@ -17,9 +17,10 @@ export const boardSlice = createSlice({
   },
 });
 
-export const getAllBoards = (state: any) => state.board.array;
+export const getAllBoards = (state: any) => {
+  return state.board.array;
+};
 export const getSingleBoard = (state: any) => {
-  console.log(state.board);
   return state.board.array;
 };
 

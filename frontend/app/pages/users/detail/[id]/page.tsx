@@ -7,7 +7,7 @@ import {
 } from "@/app/components/user/service/user.service";
 import { getUserById } from "@/app/components/user/service/user.slice";
 import { PG } from "@/app/components/common/enums/PG";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -31,7 +31,6 @@ const IdPage = (props: any) => {
     dispatch(
       modifiedUserById({
         ...user,
-        username: modified.username || user.username,
         password: modified.password || user.password,
         name: modified.name || user.name,
         phoneNumber: modified.phoneNumber || user.phoneNumber,
@@ -56,31 +55,9 @@ const IdPage = (props: any) => {
   return (
     <>
       <div className="flex flex-col justify-center items-center w-screen mt-10">
-        <div className="flex flex-col justify-start items-center w-[200px]">
-          <div className="justify-center items-center">
-            <span>ID</span>
-            <TextField
-              defaultValue={user.id}
-              variant="standard"
-              fullWidth
-              onChange={(e: any) =>
-                setModified({ ...modified, id: e.target.value })
-              }
-            />
-          </div>
-
-          <div className="justify-center items-center">
-            <span>아이디</span>
-            <TextField
-              defaultValue={user.username}
-              variant="standard"
-              fullWidth
-              onChange={(e: any) =>
-                setModified({ ...modified, username: e.target.value })
-              }
-            />
-          </div>
-
+        <div className="flex flex-col justify-start items-center w-[200px] gap-3">
+          <p>ID : {user.id}</p>
+          <p>아이디 : {user.username}</p>
           <div className="justify-center items-center">
             <span>비밀번호</span>
             <TextField

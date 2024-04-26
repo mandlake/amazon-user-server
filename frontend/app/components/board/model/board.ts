@@ -3,5 +3,6 @@ export interface IBoard {
   title?: string;
   description?: string;
   registerDate?: string;
+  content?: string;
   modDate?: string;
 }

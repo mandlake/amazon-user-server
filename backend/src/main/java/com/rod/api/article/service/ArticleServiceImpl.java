@@ -9,12 +9,14 @@ import com.rod.api.article.model.ArticleDto;
 import com.rod.api.common.component.Messenger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService{
     private final ArticleRepository repository;
 
+    @Transactional
     @Override
     public Messenger save(ArticleDto t) {
         repository.save(dtoToEntity(t));

@@ -7,11 +7,13 @@ import { destroyCookie, parseCookies } from "nookies";
 import { useEffect, useState } from "react";
 import { logout } from "../../user/service/user.service";
 import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
 
-function Header() {
-  const [showHeader, setShowHeader] = useState(false);
+const Header = () => {
+  const {} = useForm();
   const dispatch = useDispatch();
   const router = useRouter();
+  const [showHeader, setShowHeader] = useState(false);
   const [isNone, setIsNone] = useState(true);
 
   useEffect(() => {
@@ -21,11 +23,11 @@ function Header() {
       setIsNone(true);
       setShowHeader(true);
     } else {
-      console.log("쿠키가 있어서 안보임");
+      console.log("쿠키가 없어서 안보임");
       setIsNone(false);
       setShowHeader(false);
     }
-  }, [parseCookies().accessToken]);
+  }, []);
 
   const handleClick = () => {
     setIsNone(!isNone);
@@ -185,5 +187,5 @@ function Header() {
       </div>
     </nav>
   );
-}
+};
 export default Header;

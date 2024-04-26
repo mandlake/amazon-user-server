@@ -3,7 +3,7 @@
 import { parseCookies } from "nookies";
 import LoginPage from "./pages/users/login/page";
 
-const Home = () => {
+function Home() {
   const showHeader = parseCookies().message === "True";
   return (
     <>
@@ -15,6 +15,6 @@ const Home = () => {
       </div>
     </>
   );
-};
+}
 
 export default Home;

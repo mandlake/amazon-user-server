@@ -3,19 +3,17 @@
 import CardButton from "@/app/atoms/button/CardButton";
 import MoveButton from "@/app/atoms/button/MoveButton";
 import { findAllBoards } from "@/app/components/board/service/board.service";
-import { getAllBoards } from "@/app/components/board/service/board.slice";
 import { PG } from "@/app/components/common/enums/PG";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const BoardCard = () => {
   const dispatch = useDispatch();
-  const allBoards = useSelector(getAllBoards);
+  const [allBoards, setAllBoards] = useState([]);
 
   useEffect(() => {
     dispatch(findAllBoards(1)).then((res: any) => {
-      console.log(res.payload);
+      setAllBoards(res.payload);
     });
   }, []);
 

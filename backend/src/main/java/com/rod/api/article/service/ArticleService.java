@@ -18,7 +18,7 @@ public interface ArticleService extends CommandService<ArticleDto>, QueryService
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .board(Board.builder().id(dto.getBoard()).build())
-                .user(User.builder().id(dto.getId()).build())
+                .user(User.builder().id(dto.getUser()).build())
                 .build();
     }
 
